@@ -1,12 +1,8 @@
 # Kubernetes Cluster Installation and Initialization with Ansible
-
-## This guide outlines the steps to install and initialize a Kubernetes cluster on Ubuntu using Ansible.
 ## Prerequisites
+This guide outlines the steps to install and initialize a Kubernetes cluster on Ubuntu using Ansible.
+Ubuntu machines to serve as master and worker nodes, Ansible installed on your local machine. SSH access to the target machines with sudo privileges.
 
-Ubuntu machines to serve as master and worker nodes.
-Ansible installed on your local machine.
-SSH access to the target machines with sudo privileges.
-Basic knowledge of Ansible and Kubernetes.
 
 ## Here are the steps to configure SSH key access to the nodes:
 
