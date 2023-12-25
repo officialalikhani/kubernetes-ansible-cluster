@@ -1,0 +1,74 @@
+- hosts: masters
+  remote_user: <Your-User>
+  become: yes
+  become_method: sudo
+  become_user: root
+  gather_facts: yes
+  connection: ssh
+
+  vars_prompt:
+
+   - name: "pod_network_cidr"
+     prompt: "Enter the Pod Network CIDR, example: 192.168.100.0/24"
+     private: no
+
+   - name: "k8s_master_ip"
+     prompt: "Enter the Apiserver advertise address, example: 192.168.0.26"
+     private: no
+
+   - name: "pod_network_manifest_file"
+     prompt: "Enter the Pod network manifest file URL, Your choice could be flannel, weave or calico, etc."
+     private: no
+
+
+
+  tasks:
+
+   - name: Intilizing Kubernetes Cluster
+     command: kubeadm init --pod-network-cidr "{{ pod_network_cidr }}"  --apiserver-advertise-address "{{ k8s_master_ip }}"
+     run_once: true
+     delegate_to: "{{ k8s_master_ip }}"
+     ignore_errors: true
+
+   - name: Create directory for kube config
+     file:
+       path: /home/{{ansible_user }}/.kube
+       state: directory
+       owner: "{{ ansible_user }}"
+       group: "{{ ansible_user }}"
+       mode: 0755
+     ignore_errors: true
+
+   - name: Copy /etc/kubernetes/admin.conf to user home directory /home/{{ ansible_user }}/.kube/config
+     copy:
+       src: /etc/kubernetes/admin.conf
+       dest: /home/{{ ansible_user }}/.kube/config
+       remote_src: yes
+       owner: "{{ ansible_user }}"
+       group: "{{ ansible_user }}"
+       mode: '0644'
+     ignore_errors: true
+
+   - name: Remove the cache directory.
+     file:
+       path: /home/{{ ansible_user }}/.kube/cache
+       state: absent
+     ignore_errors: true
+
+   - name: Create Pod Network
+     command: "{{ item }}"
+     with_items:
+        - kubectl apply -f {{ pod_network_manifest_file }}
+
+   - name: Get the token for joining the nodes with Kuberentes master.
+     shell: kubeadm token create  --print-join-command
+     register: kubernetes_join_command
+     ignore_errors: true
+
+   - debug:
+       msg: "{{ kubernetes_join_command.stdout }}"
+     
+   - name: Copy join command to local file.
+     become: false
+     local_action: copy content="{{ kubernetes_join_command.stdout_lines[0] }}" dest="/tmp/kubernetes_join_command" mode=0777
+...
