@@ -59,12 +59,12 @@ Navigate to the repository directory:
 
 ### Run the Ansible playbook to install and configure kubectl/kubeadm/kubelet on master and workers node:
 
-    ansible-playbook -K -i inventory.ini kubernetes-playbook.yml
+    ansible-playbook -K -i inventory.ini kubernetes-cluster-installation.yml
 
 ### Run the Ansible playbook to initialize cluster on master node:
 
-    ansible-playbook -K -i inventory.ini cluster-playbook.yml
+    ansible-playbook -K -i inventory.ini kubernetes-Initialization.yml
 
 ### Join the worker nodes to the cluster by running the Ansible playbook:
 
-    ansible-playbook -K -i inventory.ini worker-playbook.yml:
+    ansible-playbook -K -i inventory.ini kubernetes-workers.yml
