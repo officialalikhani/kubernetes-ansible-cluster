@@ -10,7 +10,7 @@ Basic knowledge of Ansible and Kubernetes.
 
 ## Here are the steps to configure SSH key access to the nodes:
 
-Generate SSH Key Pair:
+### Generate SSH Key Pair:
 On your local machine, generate an SSH key pair (public and private key) if you haven't already done so:
 shell
 
