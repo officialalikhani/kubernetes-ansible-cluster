@@ -42,7 +42,7 @@ You should be able to log in to the node without being prompted for a password.
 
 Clone the repository to your local machine:
 
-    git clone https://github.com/your-username/your-repo.git
+    git clone https://github.com/officialalikhani/kubernetes-ansible-cluster.git
 
 Navigate to the repository directory:
     
@@ -50,10 +50,10 @@ Navigate to the repository directory:
 
 ### Set up your inventory file (inventory.ini) with the IP addresses or hostnames of your master and worker nodes:
 
-[masters]
-master1 ansible_host=master1-ip
+    [masters]
+     master ansible_host=<Master-IP-Address> ansible_user=<Username> ansible_port=<PORT>
+     
+    [workers]
+     worker1 ansible_host=<Worker-IP-Address> ansible_user=<Username> ansible_port=<PORT>
+     worker2 ansible_host=<Worker-IP-Address> ansible_user=<Username> ansible_port=<PORT>
 
-[workers]
-worker1 ansible_host=worker1-ip
-worker2 ansible_host=worker2-ip
-```
