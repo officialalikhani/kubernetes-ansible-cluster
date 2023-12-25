@@ -46,7 +46,7 @@ Clone the repository to your local machine:
 
 Navigate to the repository directory:
     
-    cd your-repo
+    cd kubernetes-ansible-cluster/
 
 ### Set up your inventory file (inventory.ini) with the IP addresses or hostnames of your master and worker nodes:
 
