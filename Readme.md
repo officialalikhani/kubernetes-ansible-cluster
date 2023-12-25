@@ -19,7 +19,7 @@ shell
 Choose a secure passphrase when prompted or leave it blank for convenience.
 This command will generate two files: id_rsa (private key) and id_rsa.pub (public key).
 
-Distribute Public Key:
+### Distribute Public Key:
 
 Copy the public key (id_rsa.pub) to the target nodes that you want to access:
 shell
@@ -29,7 +29,7 @@ shell
 Enter the password for the user account on the target node.
 This command will append the public key to the ~/.ssh/authorized_keys file on the target node, allowing SSH key-based authentication.
 
-Test SSH Access:
+### Test SSH Access:
 
 Verify that you can now access the target node without entering a password:
 shell
