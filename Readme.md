@@ -37,3 +37,23 @@ shell
     ssh user@node-ip
 
 You should be able to log in to the node without being prompted for a password.
+
+### Getting Started
+
+Clone the repository to your local machine:
+
+    git clone https://github.com/your-username/your-repo.git
+
+Navigate to the repository directory:
+    
+    cd your-repo
+
+### Set up your inventory file (inventory.ini) with the IP addresses or hostnames of your master and worker nodes:
+
+[masters]
+master1 ansible_host=master1-ip
+
+[workers]
+worker1 ansible_host=worker1-ip
+worker2 ansible_host=worker2-ip
+```
